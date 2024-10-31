@@ -1,6 +1,13 @@
 Isotope eCommerce Changelog
 ===========================
 
+Version 2.9.3 (2024-10-31)
+--------------------------
+
+- Always execute the checkoutComplete hook
+- Handle missing $objPage when loading config (#2546)
+- Correctly handle hash in URL for productlist caching (#2545)
+
 
 Version 2.9.2 (2024-10-23)
 --------------------------
