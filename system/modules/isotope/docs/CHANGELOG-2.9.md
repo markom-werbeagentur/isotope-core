@@ -1,6 +1,16 @@
 Isotope eCommerce Changelog
 ===========================
 
+
+Version 2.9.4 (2024-11-05)
+--------------------------
+
+- Fixed product variants not being added to cart
+- Fix count of products and net value calculation of reports overview (#2542)
+- Fix product list caching script (#2547)
+- Dropped the patchwork/utf8 dependency (#2548)
+
+
 Version 2.9.3 (2024-10-31)
 --------------------------
 
