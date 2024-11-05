@@ -23,6 +23,7 @@ use Contao\System;
 use Haste\Input\Input;
 use Isotope\CompatibilityHelper;
 use Isotope\Interfaces\IsotopeProduct;
+use Isotope\Model\Attribute;
 use Isotope\Model\Product;
 use Isotope\Model\Product\AbstractProduct;
 use Symfony\Component\HttpFoundation\Response;
@@ -118,11 +119,6 @@ class ProductReader extends Module
             throw new ResponseException(new Response($content));
         }
 
-        if (!$this->iso_disable_options) {
-            $arrConfig['validateVariant'] = false;
-            $objProduct = $objProduct->validateVariant();
-        }
-
         $this->addMetaTags($objProduct);
         $this->addCanonicalProductUrls($objProduct);
 
@@ -200,11 +196,9 @@ class ProductReader extends Module
                     $responseContext = System::getContainer()->get('contao.routing.response_context_accessor')->getResponseContext();
 
                     if ($responseContext && $responseContext->has(HtmlHeadBag::class)) {
-                        $responseContext
-                            ->get(HtmlHeadBag::class)
-                            ->setCanonicalUri($href)
-                        ;
-
+                        /** @var HtmlHeadBag $htmlHeadBag */
+                        $htmlHeadBag = $responseContext->get(HtmlHeadBag::class);
+                        $htmlHeadBag->setKeepParamsForCanonical(array_intersect($objProduct->getType()->getVariantAttributes(), Attribute::getVariantOptionFields()));
                         break;
                     }
                 }
