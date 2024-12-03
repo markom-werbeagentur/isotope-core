@@ -305,7 +305,7 @@ class Standard extends AbstractProduct implements WeightAggregate, IsotopeProduc
                     continue;
                 }
 
-                if ($isMember && $blnHasProtected && $objVariants->protected) {
+                if ($blnHasProtected && $objVariants->protected) {
                     $groups = StringUtil::deserialize($objVariants->groups);
 
                     if (empty($groups) || !\is_array($groups) || !\count(array_intersect($groups, FrontendUser::getInstance()->groups))) {
